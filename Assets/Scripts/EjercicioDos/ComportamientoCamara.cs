@@ -24,13 +24,8 @@ public class ComportamientoCamara : MonoBehaviour
         {
             if (Physics.Raycast(cameraRay, out rayHit, Mathf.Infinity))
             {
-
                 agent.destination = rayHit.point;
-
-
             }
         }
-
-       
     }
 }
