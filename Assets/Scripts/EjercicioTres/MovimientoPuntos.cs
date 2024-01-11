@@ -9,13 +9,14 @@ public class MovimientoPuntos : MonoBehaviour
     public List<Vector3> listaVectores ;
 
     public NavMeshAgent agente;
-
+    public GameObject heroe;
+    bool seguir = false;
     int actual = 0;
 
     private void Start()
     {
         /* TODO: Crear la lista de puntos (se puede hacer por código o desde la UI*/
-        listaVectores.Add(new Vector3(-2, 0.283f, -2)); listaVectores.Add(new Vector3(-2, 0.823f, 2)); listaVectores.Add(new Vector3(2, 0.283f, 2)); listaVectores.Add(new Vector3(2, 0.283f, -2));
+        listaVectores.Add(new Vector3(8, -5.487415f, 2)); listaVectores.Add(new Vector3(8, -5.487415f, 8)); listaVectores.Add(new Vector3(12, -5.487415f, 8)); listaVectores.Add(new Vector3(12, -5.487415f, 2));
 
         /* TODO: Establecer el primer punto como destino */
         agente.destination = listaVectores[0];
@@ -34,7 +35,7 @@ public class MovimientoPuntos : MonoBehaviour
         */
        if (Physics.Raycast(patrullaRay, out hit, 3f))
         {
-            agente.destination = hit.point;
+            seguir = true;
         }
         else
         {
@@ -44,23 +45,30 @@ public class MovimientoPuntos : MonoBehaviour
 
     void ruta()
     {
-        if (agente.transform.position == listaVectores[0])
+        if (seguir)
         {
-            agente.destination = listaVectores[1];
+            agente.destination = heroe.transform.position;
         }
-        else if (agente.transform.position == listaVectores[1])
+        else
         {
-            agente.destination = listaVectores[2];
+            if (agente.transform.position == listaVectores[0])
+            {
+                agente.destination = listaVectores[1];
+            }
+            else if (agente.transform.position == listaVectores[1])
+            {
+                agente.destination = listaVectores[2];
 
-        }
-        else if (agente.transform.position == listaVectores[2])
-        {
-            agente.destination = listaVectores[3];
+            }
+            else if (agente.transform.position == listaVectores[2])
+            {
+                agente.destination = listaVectores[3];
 
-        }
-        else if (agente.transform.position == listaVectores[3])
-        {
-            agente.destination = listaVectores[0];
+            }
+            else if (agente.transform.position == listaVectores[3])
+            {
+                agente.destination = listaVectores[0];
+            }
         }
     }
 }

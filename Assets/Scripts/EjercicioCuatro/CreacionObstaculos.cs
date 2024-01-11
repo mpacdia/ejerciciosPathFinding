@@ -45,5 +45,11 @@ public class CreacionObstaculos : MonoBehaviour
             }
 
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawRay(transform.position, transform.forward);
+    }
 }
 
